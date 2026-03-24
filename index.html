@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Vibes — Music for Film & Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elevated: #111111;
+    --bg-card: #161616;
+    --text: #e8e4df;
+    --text-dim: #8a8580;
+    --text-faint: #5a5550;
+    --accent: #c8a882;
+    --accent-glow: rgba(200, 168, 130, 0.15);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-faint) transparent;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--grain);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    padding: 1rem 3rem;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.7; transform: translateX(-50%) scale(1.15); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 1.1;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-cta:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .hero-cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- SECTIONS ---- */
+  section {
+    padding: 8rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-text {
+    color: var(--text-dim);
+    max-width: 520px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  /* ---- ABOUT ---- */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(1.05);
+    transition: transform 6s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.05);
+  }
+
+  .about-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(200, 168, 130, 0.2);
+    pointer-events: none;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .stat h3 {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat p {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* ---- SERVICES ---- */
+  #services {
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 4rem;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .service-card {
+    background: var(--bg);
+    padding: 3rem 2.5rem;
+    transition: all 0.5s ease;
+    position: relative;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+
+  .service-card:hover::before { width: 100%; }
+
+  .service-card:hover {
+    background: var(--bg-card);
+  }
+
+  .service-number {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--text-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .service-card p {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* ---- WORK / CREDITS ---- */
+  #work {
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .work-list {
+    margin-top: 4rem;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .work-item:hover {
+    padding-left: 1rem;
+    border-color: rgba(200, 168, 130, 0.2);
+  }
+
+  .work-type {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+
+  .work-year {
+    font-size: 0.8rem;
+    color: var(--text-faint);
+  }
+
+  /* ---- PROCESS ---- */
+  #process {
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .process-step {
+    position: relative;
+    padding-top: 2rem;
+  }
+
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .step-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--text-faint);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .process-step h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .process-step p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ---- CONTACT ---- */
+  #contact {
+    border-top: 1px solid rgba(255,255,255,0.04);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #contact .section-heading {
+    max-width: 700px;
+  }
+
+  #contact .section-text {
+    margin-bottom: 3rem;
+  }
+
+  .contact-email {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    color: var(--accent);
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.3s;
+  }
+
+  .contact-email:hover { opacity: 0.7; }
+
+  .contact-email::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.3;
+  }
+
+  .contact-socials {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .contact-socials a {
+    color: var(--text-faint);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .contact-socials a:hover { color: var(--accent); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 3rem;
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .work-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .work-item:hover { padding-left: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 1.5rem; }
+  }
+
+  /* ---- FADE-IN ON SCROLL ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Corporate <span>Vibes</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Music for Film · Documentary · Brand</div>
+  <h1>Sound that makes your story <em>unforgettable</em></h1>
+  <p class="hero-sub">Original scores and soundscapes crafted to move audiences — from indie docs to brand campaigns.</p>
+  <a href="#contact" class="hero-cta">
+    Start a conversation
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </a>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image">
+    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" alt="Studio atmosphere">
+  </div>
+  <div>
+    <div class="section-label reveal">About</div>
+    <h2 class="section-heading reveal">Music built around your characters, not a template</h2>
+    <p class="section-text reveal">
+      Corporate Vibes is the scoring and music production practice of Aaron Joseph — a composer, producer, and storyteller based in Seattle. Every project starts with listening: to your story, your characters, and the emotional arc you're building toward. The result is music that feels like it was always meant to be there.
+    </p>
+    <div class="stat-row reveal">
+      <div class="stat">
+        <h3>10+</h3>
+        <p>Years in creative production</p>
+      </div>
+      <div class="stat">
+        <h3>3</h3>
+        <p>Active music identities</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal">Services</div>
+  <h2 class="section-heading reveal">What I do</h2>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <h3>Film & Documentary Scoring</h3>
+      <p>Original compositions that follow your story's emotional arc — organic, character-driven music that evolves with every scene.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <h3>Brand & Corporate Audio</h3>
+      <p>Ambient textures, sonic logos, and campaign soundtracks that give your brand a distinctive auditory identity.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <h3>Music Licensing</h3>
+      <p>A growing catalog of original tracks available for sync licensing — from contemplative piano to layered electronic atmospheres.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label reveal">Selected Work</div>
+  <h2 class="section-heading reveal">Projects & credits</h2>
+  <div class="work-list">
+    <div class="work-item reveal">
+      <span class="work-type">Documentary Series</span>
+      <span class="work-title">Catalyst Series — S2E2 "Helfie"</span>
+      <span class="work-year">2025–26</span>
+    </div>
+    <div class="work-item reveal">
+      <span class="work-type">Ambient / Corporate</span>
+      <span class="work-title">Corporate Vibes — Original Catalog</span>
+      <span class="work-year">Ongoing</span>
+    </div>
+    <div class="work-item reveal">
+      <span class="work-type">Singer-Songwriter</span>
+      <span class="work-title">Aaron Joseph — Solo Releases</span>
+      <span class="work-year">Ongoing</span>
+    </div>
+    <div class="work-item reveal">
+      <span class="work-type">Instrumental</span>
+      <span class="work-title">Diet 75 — Piano Works</span>
+      <span class="work-year">Ongoing</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label reveal">Process</div>
+  <h2 class="section-heading reveal">How we work together</h2>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h4>Listen</h4>
+      <p>We talk about your project, your vision, and what the music needs to make people feel. I watch your cuts. I read your scripts.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h4>Direction</h4>
+      <p>I build a music lookbook — references, palettes, and a compositional direction that maps to your story's arc.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h4>Compose</h4>
+      <p>Themes, sketches, and demos. We iterate until every cue feels inevitable — like it grew out of the footage itself.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h4>Deliver</h4>
+      <p>Polished stems, masters, and any format you need. Clean handoff, no loose ends.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Get in touch</div>
+  <h2 class="section-heading reveal">Let's make something <br>that resonates</h2>
+  <p class="section-text reveal">Have a project in mind? Just want to talk about what music could do for your story? Reach out.</p>
+  <a href="mailto:hello@corp-vibes.com" class="contact-email reveal">hello@corp-vibes.com</a>
+  <div class="contact-socials reveal">
+    <a href="#">Instagram</a>
+    <a href="#">Spotify</a>
+    <a href="#">YouTube</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Corporate Vibes. All rights reserved.
+</footer>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
