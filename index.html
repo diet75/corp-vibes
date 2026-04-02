@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corporate Vibes — Music for Film & Story</title>
+<title>Corporate Vibes — Music for Picture</title>
+<meta name="description" content="Composer & sound designer for film, documentary, and brand. Seattle-based, story-driven.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0a;
     --bg-elevated: #111111;
     --bg-card: #161616;
-    --text: #e8e4df;
-    --text-dim: #8a8580;
-    --text-faint: #5a5550;
-    --accent: #c8a882;
-    --accent-glow: rgba(200, 168, 130, 0.15);
-    --serif: 'Cormorant Garamond', Georgia, serif;
+    --amber: #d4943a;
+    --amber-dim: #a87430;
+    --amber-glow: rgba(212, 148, 58, 0.12);
+    --text: #e8e4de;
+    --text-dim: #8a847a;
+    --text-muted: #5a5650;
+    --border: #222;
+    --border-light: #2a2a2a;
+    --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
-    --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,220 +30,70 @@
   html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: var(--text-faint) transparent;
+    scrollbar-color: var(--amber-dim) var(--bg);
   }
 
   body {
+    font-family: var(--sans);
     background: var(--bg);
     color: var(--text);
-    font-family: var(--sans);
+    line-height: 1.6;
     font-weight: 300;
-    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: var(--grain);
-    pointer-events: none;
-    z-index: 9999;
+  ::selection {
+    background: var(--amber);
+    color: var(--bg);
   }
 
-  /* ---- NAV ---- */
+  /* ── NAV ── */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
+    padding: 1.5rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
-    backdrop-filter: blur(20px);
-    background: rgba(10, 10, 10, 0.7);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
     transition: all 0.4s ease;
+    background: transparent;
   }
 
   nav.scrolled {
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
   }
 
   .nav-logo {
     font-family: var(--serif);
     font-size: 1.3rem;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
     color: var(--text);
     text-decoration: none;
+    letter-spacing: 0.02em;
   }
 
-  .nav-logo span {
-    color: var(--accent);
-  }
+  .nav-logo span { color: var(--amber); }
 
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
 
   .nav-links a {
     color: var(--text-dim);
     text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    font-weight: 400;
     transition: color 0.3s;
-    position: relative;
   }
 
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
+  .nav-links a:hover { color: var(--amber); }
 
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { width: 100%; }
-
-  /* ---- HERO ---- */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 6rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-    filter: blur(80px);
-    pointer-events: none;
-    animation: pulse 8s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
-    50% { opacity: 0.7; transform: translateX(-50%) scale(1.15); }
-  }
-
-  .hero-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
-
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    line-height: 1.1;
-    max-width: 800px;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.5s forwards;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 1.05rem;
-    color: var(--text-dim);
-    max-width: 500px;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.7s forwards;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.9rem 2.2rem;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: all 0.4s ease;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.9s forwards;
-  }
-
-  .hero-cta:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .hero-cta svg {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-  }
-
-  .hero-cta:hover svg { transform: translateX(4px); }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 1.2s forwards;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ---- SECTIONS ---- */
+  /* ── SECTIONS ── */
   section {
     padding: 8rem 3rem;
     max-width: 1200px;
@@ -247,199 +101,483 @@
   }
 
   .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--amber);
     margin-bottom: 1.5rem;
+    font-weight: 500;
   }
 
   .section-heading {
     font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    line-height: 1.2;
-    max-width: 600px;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.15;
     margin-bottom: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
   }
 
   .section-text {
     color: var(--text-dim);
-    max-width: 520px;
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-size: 1.05rem;
+    max-width: 560px;
+    line-height: 1.75;
   }
 
-  /* ---- ABOUT ---- */
-  #about {
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, var(--amber-glow) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    max-width: 800px;
+  }
+
+  .hero-tagline em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    color: var(--text-dim);
+    font-size: 1.15rem;
+    max-width: 480px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--amber);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--amber-dim);
+    transition: all 0.3s;
+  }
+
+  .hero-cta:hover { gap: 1.2rem; }
+
+  .hero-cta svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s;
+  }
+
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 2rem;
   }
 
-  .about-image {
-    position: relative;
-    aspect-ratio: 3/4;
+  .about-text p {
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    font-size: 1.02rem;
+  }
+
+  .about-identities {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .identity {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .identity:hover {
+    border-color: var(--amber-dim);
+    background: var(--amber-glow);
+  }
+
+  .identity h4 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+    color: var(--text);
+  }
+
+  .identity p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  /* ── AWARDS ── */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-top: 3rem;
+    border: 1px solid var(--border);
+  }
+
+  .award-item {
+    background: var(--bg);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.3s;
+  }
+
+  .award-item:hover {
+    background: var(--bg-elevated);
+  }
+
+  .award-laurel {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .award-laurel svg {
+    width: 22px;
+    height: 22px;
+    color: var(--amber);
+    flex-shrink: 0;
+  }
+
+  .award-status {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+  }
+
+  .award-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+
+  .award-details {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .award-year {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PLACEMENTS ── */
+  .placements-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .placement-item {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 0.8fr;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .placement-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .placement-item:hover {
+    padding-left: 1rem;
+    background: linear-gradient(90deg, var(--amber-glow) 0%, transparent 70%);
+  }
+
+  .placement-client {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--text);
+  }
+
+  .placement-detail {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .placement-artist {
+    text-align: right;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    font-weight: 500;
+  }
+
+  .placement-highlight {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 600px) {
+    .placement-item {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+    .placement-artist { text-align: left; }
+  }
+
+  /* ── LISTEN ── */
+  .listen-filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 2rem 0 2.5rem;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.5rem 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 1px;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: var(--amber-glow);
+  }
+
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .track-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    transition: all 0.4s;
+    border-radius: 2px;
+  }
+
+  .track-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+
+  .track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .track-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+
+  .track-artist {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .track-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+  }
+
+  .track-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(168, 116, 48, 0.25);
+    border-radius: 1px;
+  }
+
+  .track-embed {
+    margin-top: 1rem;
+    border-radius: 2px;
     overflow: hidden;
   }
 
-  .about-image img {
+  .track-embed iframe {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(30%) contrast(1.05);
-    transition: transform 6s ease;
+    border: none;
+    display: block;
   }
 
-  .about-image:hover img {
-    transform: scale(1.05);
+  /* ── SCENE SHOWCASE ── */
+  .scene-showcase {
+    margin-top: 5rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    border-radius: 2px;
   }
 
-  .about-image::after {
+  .scene-visual {
+    aspect-ratio: 21/9;
+    background: linear-gradient(135deg, #1a1510 0%, #0d0b08 50%, #151210 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scene-visual::after {
     content: '';
     position: absolute;
     inset: 0;
-    border: 1px solid rgba(200, 168, 130, 0.2);
-    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 60%, var(--bg-card));
   }
 
-  .stat-row {
-    display: flex;
-    gap: 3rem;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .stat h3 {
-    font-family: var(--serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-  }
-
-  .stat p {
-    font-size: 0.75rem;
-    color: var(--text-faint);
+  .scene-placeholder {
+    color: var(--text-muted);
+    font-size: 0.82rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-top: 0.3rem;
+    z-index: 1;
   }
 
-  /* ---- SERVICES ---- */
-  #services {
-    border-top: 1px solid rgba(255,255,255,0.04);
+  .scene-info {
+    padding: 2rem;
+    background: var(--bg-card);
   }
 
+  .scene-info h4 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .scene-info .scene-credit {
+    color: var(--amber-dim);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .scene-info .scene-embed iframe {
+    width: 100%;
+    border: none;
+  }
+
+  /* ── SERVICES ── */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    margin-top: 4rem;
-    background: rgba(255,255,255,0.04);
+    background: var(--border);
+    margin-top: 3rem;
+    border: 1px solid var(--border);
   }
 
   .service-card {
     background: var(--bg);
-    padding: 3rem 2.5rem;
-    transition: all 0.5s ease;
-    position: relative;
-    cursor: default;
+    padding: 3rem 2rem;
+    transition: background 0.3s;
   }
 
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.6s ease;
-  }
+  .service-card:hover { background: var(--bg-elevated); }
 
-  .service-card:hover::before { width: 100%; }
-
-  .service-card:hover {
-    background: var(--bg-card);
-  }
-
-  .service-number {
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    color: var(--text-faint);
+  .service-num {
+    font-size: 0.72rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
     margin-bottom: 1.5rem;
+    font-weight: 500;
   }
 
   .service-card h3 {
     font-family: var(--serif);
-    font-weight: 400;
     font-size: 1.4rem;
     margin-bottom: 1rem;
-    line-height: 1.3;
+    font-weight: 400;
   }
 
   .service-card p {
     color: var(--text-dim);
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     line-height: 1.7;
   }
 
-  /* ---- WORK / CREDITS ---- */
-  #work {
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .work-list {
-    margin-top: 4rem;
-  }
-
-  .work-item {
-    display: grid;
-    grid-template-columns: 1fr 2fr auto;
-    gap: 2rem;
-    align-items: center;
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: all 0.3s ease;
-    cursor: default;
-  }
-
-  .work-item:hover {
-    padding-left: 1rem;
-    border-color: rgba(200, 168, 130, 0.2);
-  }
-
-  .work-type {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
-
-  .work-title {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 400;
-  }
-
-  .work-year {
-    font-size: 0.8rem;
-    color: var(--text-faint);
-  }
-
-  /* ---- PROCESS ---- */
-  #process {
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-
+  /* ── PROCESS ── */
   .process-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 
   .process-step {
@@ -452,126 +590,115 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 30px;
+    width: 2rem;
     height: 1px;
-    background: var(--accent);
+    background: var(--amber-dim);
   }
 
   .step-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    color: var(--text-faint);
-    font-weight: 300;
-    margin-bottom: 0.5rem;
-    line-height: 1;
+    font-size: 0.72rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
   }
 
   .process-step h4 {
     font-family: var(--serif);
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
     font-weight: 400;
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
   }
 
   .process-step p {
-    font-size: 0.85rem;
     color: var(--text-dim);
-    line-height: 1.7;
+    font-size: 0.88rem;
+    line-height: 1.65;
   }
 
-  /* ---- CONTACT ---- */
+  /* ── CONTACT ── */
   #contact {
-    border-top: 1px solid rgba(255,255,255,0.04);
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #contact .section-heading {
-    max-width: 700px;
-  }
-
-  #contact .section-text {
-    margin-bottom: 3rem;
+    padding: 10rem 3rem;
   }
 
   .contact-email {
+    display: inline-block;
     font-family: var(--serif);
-    font-size: clamp(1.3rem, 3vw, 2.2rem);
-    color: var(--accent);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--amber);
     text-decoration: none;
-    position: relative;
-    transition: opacity 0.3s;
+    margin-top: 2rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
   }
 
-  .contact-email:hover { opacity: 0.7; }
-
-  .contact-email::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--accent);
-    opacity: 0.3;
+  .contact-email:hover {
+    border-bottom-color: var(--amber);
   }
 
   .contact-socials {
-    display: flex;
-    gap: 2rem;
     margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
   }
 
   .contact-socials a {
-    color: var(--text-faint);
+    color: var(--text-muted);
     text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: color 0.3s;
   }
 
-  .contact-socials a:hover { color: var(--accent); }
+  .contact-socials a:hover { color: var(--amber); }
 
-  /* ---- FOOTER ---- */
+  /* ── FOOTER ── */
   footer {
     text-align: center;
-    padding: 3rem;
+    padding: 2rem 3rem;
+    color: var(--text-muted);
     font-size: 0.75rem;
-    color: var(--text-faint);
     letter-spacing: 0.05em;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    border-top: 1px solid var(--border);
   }
 
-  /* ---- RESPONSIVE ---- */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 5rem 1.5rem; }
-    #about { grid-template-columns: 1fr; gap: 3rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
-    .work-item { grid-template-columns: 1fr; gap: 0.3rem; }
-    .work-item:hover { padding-left: 0; }
-  }
-
-  @media (max-width: 600px) {
-    .process-steps { grid-template-columns: 1fr; }
-    .stat-row { flex-direction: column; gap: 1.5rem; }
-  }
-
-  /* ---- FADE-IN ON SCROLL ---- */
+  /* ── REVEAL ANIMATION ── */
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.72rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .tracks-grid { grid-template-columns: 1fr; }
+    .hero-scroll-hint { display: none; }
+    #contact { padding: 6rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-tagline { font-size: 2.4rem; }
+    .process-steps { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; }
+    .scene-info[style] { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -580,50 +707,256 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Corporate <span>Vibes</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#awards">Awards</a>
+    <a href="#listen">Listen</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Music for Film · Documentary · Brand</div>
-  <h1>Sound that makes your story <em>unforgettable</em></h1>
-  <p class="hero-sub">Original scores and soundscapes crafted to move audiences — from indie docs to brand campaigns.</p>
-  <a href="#contact" class="hero-cta">
-    Start a conversation
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
+  <div class="hero-scroll-hint">Scroll</div>
+  <h1 class="hero-tagline reveal">Music that lives<br>inside the <em>story</em></h1>
+  <p class="hero-sub reveal">Composer & sound designer for film, documentary, and brand. I write music that earns its place in the frame.</p>
+  <a href="#listen" class="hero-cta reveal">
+    Listen
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </a>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-image">
-    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" alt="Studio atmosphere">
-  </div>
-  <div>
-    <div class="section-label reveal">About</div>
-    <h2 class="section-heading reveal">Music built around your characters, not a template</h2>
-    <p class="section-text reveal">
-      Corporate Vibes is the scoring and music production practice of Aaron Joseph — a composer, producer, and storyteller based in Seattle. Every project starts with listening: to your story, your characters, and the emotional arc you're building toward. The result is music that feels like it was always meant to be there.
-    </p>
-    <div class="stat-row reveal">
-      <div class="stat">
-        <h3>10+</h3>
-        <p>Years in creative production</p>
+  <div class="section-label reveal">About</div>
+  <h2 class="section-heading reveal">Aaron Joseph Davidson</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a Seattle-based composer and sound designer working across documentary, narrative film, and brand. My approach is character-driven — I treat every project like a collaboration between music and story, not an afterthought layered on top.</p>
+      <p>Currently scoring Season 2 of the Catalyst Series documentary. Previously ten years in B2B tech, which taught me how to listen to what a project actually needs before I write a single note.</p>
+    </div>
+    <div class="about-identities reveal">
+      <div class="identity">
+        <h4>Corporate Vibes</h4>
+        <p>Scoring, sound design & music for picture</p>
       </div>
-      <div class="stat">
-        <h3>3</h3>
-        <p>Active music identities</p>
+      <div class="identity">
+        <h4>Diet 75</h4>
+        <p>Piano-driven instrumental & ambient work</p>
+      </div>
+      <div class="identity">
+        <h4>Aaron Joseph</h4>
+        <p>Singer-songwriter & vocal compositions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS & RECOGNITION -->
+<section id="awards">
+  <div class="section-label reveal">Recognition</div>
+  <h2 class="section-heading reveal">Awards & Selections</h2>
+  <p class="section-text reveal">Award-winning music for documentary and branded entertainment.</p>
+
+  <div class="awards-grid reveal">
+    <div class="award-item">
+      <div class="award-laurel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.5 2-4 3.5-4 6.5C8 12 10 14 12 14s4-2 4-4.5c0-3-2.5-4.5-4-6.5z"/><path d="M8.5 14c-2 1-3.5 3-3.5 5.5h14c0-2.5-1.5-4.5-3.5-5.5"/><line x1="12" y1="14" x2="12" y2="21"/></svg>
+        <span class="award-status">Winner</span>
+      </div>
+      <div class="award-title">American Advertising Awards</div>
+      <div class="award-details">ADDY Award — Seattle Competition</div>
+      <div class="award-year">2026</div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-laurel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.5 2-4 3.5-4 6.5C8 12 10 14 12 14s4-2 4-4.5c0-3-2.5-4.5-4-6.5z"/><path d="M8.5 14c-2 1-3.5 3-3.5 5.5h14c0-2.5-1.5-4.5-3.5-5.5"/><line x1="12" y1="14" x2="12" y2="21"/></svg>
+        <span class="award-status">Honoree</span>
+      </div>
+      <div class="award-title">The Webby Awards</div>
+      <div class="award-details">Video & Film — Branded Entertainment — Documentary</div>
+      <div class="award-year">2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLACEMENTS -->
+<section id="listen">
+  <div class="section-label reveal">As heard in</div>
+  <h2 class="section-heading reveal">Placements & Credits</h2>
+  <p class="section-text reveal">Original music and production across film, television, brand, and media.</p>
+
+  <div class="placements-list reveal">
+    <div class="placement-item">
+      <div class="placement-client">The Catalyst Series</div>
+      <div class="placement-detail">
+        Original Music & Sound Design — Season 1, Episodes 1–3
+        <div class="placement-highlight">Microsoft Azure + NVIDIA · Published on Microsoft YouTube · 100K+ views</div>
+      </div>
+      <div class="placement-artist">Corporate Vibes</div>
+    </div>
+
+    <div class="placement-item">
+      <div class="placement-client">Sam & Kate</div>
+      <div class="placement-detail">
+        "All My Ghosts" — featured in the 2022 film starring Dustin Hoffman & Sissy Spacek
+        <div class="placement-highlight">Produced as hollywood. · Dir. Darren Le Gallo · EP Amy Adams</div>
+      </div>
+      <div class="placement-artist">Aaron Joseph</div>
+    </div>
+
+    <div class="placement-item">
+      <div class="placement-client">MTV</div>
+      <div class="placement-detail">
+        Multiple placements across 16 and Pregnant, Teen Mom & Teen Mom 2
+      </div>
+      <div class="placement-artist">Aaron Joseph</div>
+    </div>
+
+    <div class="placement-item">
+      <div class="placement-client">Seattle Public Library</div>
+      <div class="placement-detail">
+        Original music production
+      </div>
+      <div class="placement-artist">Corporate Vibes</div>
+    </div>
+
+    <div class="placement-item">
+      <div class="placement-client">Tangle News</div>
+      <div class="placement-detail">
+        Original music production
+      </div>
+      <div class="placement-artist">Diet 75</div>
+    </div>
+
+    <div class="placement-item">
+      <div class="placement-client">The Appetite Podcast</div>
+      <div class="placement-detail">
+        Theme music — Opal: Food + Body Wisdom (143+ episodes)
+        <div class="placement-highlight">"Settle In" by Diet 75</div>
+      </div>
+      <div class="placement-artist">Diet 75</div>
+    </div>
+  </div>
+
+  <!-- Listen / Samples -->
+  <div style="margin-top: 5rem;">
+    <div class="section-label reveal">Listen</div>
+    <h3 class="section-heading reveal" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">Selected tracks</h3>
+  </div>
+
+  <div class="listen-filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="contemplative">Contemplative</button>
+    <button class="filter-btn" data-filter="warmth">Warmth</button>
+    <button class="filter-btn" data-filter="drive">Drive</button>
+    <button class="filter-btn" data-filter="atmosphere">Atmosphere</button>
+  </div>
+
+  <div class="tracks-grid reveal">
+
+    <div class="track-card" data-moods="contemplative atmosphere">
+      <div class="track-header">
+        <div>
+          <div class="track-title">All My Ghosts</div>
+          <div class="track-artist">hollywood.</div>
+        </div>
+      </div>
+      <div class="track-tags">
+        <span class="track-tag">Contemplative</span>
+        <span class="track-tag">Atmosphere</span>
+        <span class="track-tag">Film Sync</span>
+      </div>
+      <div class="track-embed">
+        <iframe width="100%" height="152" style="border-radius:2px;" src="https://www.youtube.com/embed/XiZbDYRPoCM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="track-card" data-moods="warmth contemplative">
+      <div class="track-header">
+        <div>
+          <div class="track-title">Empty Tank</div>
+          <div class="track-artist">Diet 75</div>
+        </div>
+      </div>
+      <div class="track-tags">
+        <span class="track-tag">Warmth</span>
+        <span class="track-tag">Contemplative</span>
+      </div>
+      <div class="track-embed">
+        <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/diet75/empty-tank&color=%23d4943a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="track-card" data-moods="drive warmth">
+      <div class="track-header">
+        <div>
+          <div class="track-title">Oh Boy</div>
+          <div class="track-artist">Diet 75</div>
+        </div>
+      </div>
+      <div class="track-tags">
+        <span class="track-tag">Drive</span>
+        <span class="track-tag">Warmth</span>
+      </div>
+      <div class="track-embed">
+        <iframe width="100%" height="152" style="border-radius:2px;" src="https://www.youtube.com/embed/046y6piFWJg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="track-card" data-moods="warmth atmosphere">
+      <div class="track-header">
+        <div>
+          <div class="track-title">Settle In</div>
+          <div class="track-artist">Diet 75</div>
+        </div>
+      </div>
+      <div class="track-tags">
+        <span class="track-tag">Warmth</span>
+        <span class="track-tag">Atmosphere</span>
+        <span class="track-tag">Podcast Theme</span>
+      </div>
+      <div class="track-embed">
+        <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/diet75/settle-in&color=%23d4943a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Catalyst Series Showcase -->
+  <div style="margin-top: 5rem;">
+    <div class="section-label reveal">Showcase</div>
+    <h3 class="section-heading reveal" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">The Catalyst Series</h3>
+    <p class="section-text reveal" style="margin-bottom: 2rem;">A documentary series presented by Microsoft Azure and NVIDIA, following three startups using AI to tackle global challenges. Original music & sound design for all three Season 1 episodes.</p>
+  </div>
+
+  <div class="scene-showcase reveal" style="border: none;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2px;">
+      <iframe
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+        src="https://www.youtube.com/embed/videoseries?list=PLDKszKyHtSCPIC3LUvb6mz20sF4ucshzv&color=white&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="scene-info" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 1px;">
+      <div style="background: var(--bg-card); padding: 1.5rem;">
+        <h4 style="font-family: var(--serif); font-size: 1rem; margin-bottom: 0.3rem;">Ep 1 — Pangaea Data</h4>
+        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">Changing how doctors diagnose diseases with AI</p>
+      </div>
+      <div style="background: var(--bg-card); padding: 1.5rem;">
+        <h4 style="font-family: var(--serif); font-size: 1rem; margin-bottom: 0.3rem;">Ep 2 — Basecamp Research</h4>
+        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">How AI is mapping the tree of life</p>
+      </div>
+      <div style="background: var(--bg-card); padding: 1.5rem;">
+        <h4 style="font-family: var(--serif); font-size: 1rem; margin-bottom: 0.3rem;">Ep 3 — Global Objects</h4>
+        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">3D objects: the next frontier of data</p>
       </div>
     </div>
   </div>
@@ -635,47 +968,19 @@
   <h2 class="section-heading reveal">What I do</h2>
   <div class="services-grid reveal">
     <div class="service-card">
-      <div class="service-number">01</div>
+      <div class="service-num">01</div>
       <h3>Film & Documentary Scoring</h3>
-      <p>Original compositions that follow your story's emotional arc — organic, character-driven music that evolves with every scene.</p>
+      <p>Original scores built from your story's DNA. Character motifs, emotional arcs, and sound design that lives inside the edit — not on top of it.</p>
     </div>
     <div class="service-card">
-      <div class="service-number">02</div>
-      <h3>Brand & Corporate Audio</h3>
-      <p>Ambient textures, sonic logos, and campaign soundtracks that give your brand a distinctive auditory identity.</p>
+      <div class="service-num">02</div>
+      <h3>Brand & Commercial Audio</h3>
+      <p>Sonic identities, ad scores, and ambient soundscapes for brands that want to sound like themselves, not a stock library.</p>
     </div>
     <div class="service-card">
-      <div class="service-number">03</div>
+      <div class="service-num">03</div>
       <h3>Music Licensing</h3>
-      <p>A growing catalog of original tracks available for sync licensing — from contemplative piano to layered electronic atmospheres.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work">
-  <div class="section-label reveal">Selected Work</div>
-  <h2 class="section-heading reveal">Projects & credits</h2>
-  <div class="work-list">
-    <div class="work-item reveal">
-      <span class="work-type">Documentary Series</span>
-      <span class="work-title">Catalyst Series — S2E2 "Helfie"</span>
-      <span class="work-year">2025–26</span>
-    </div>
-    <div class="work-item reveal">
-      <span class="work-type">Ambient / Corporate</span>
-      <span class="work-title">Corporate Vibes — Original Catalog</span>
-      <span class="work-year">Ongoing</span>
-    </div>
-    <div class="work-item reveal">
-      <span class="work-type">Singer-Songwriter</span>
-      <span class="work-title">Aaron Joseph — Solo Releases</span>
-      <span class="work-year">Ongoing</span>
-    </div>
-    <div class="work-item reveal">
-      <span class="work-type">Instrumental</span>
-      <span class="work-title">Diet 75 — Piano Works</span>
-      <span class="work-year">Ongoing</span>
+      <p>A growing catalog of original compositions available for sync. Instrumental, ambient, and piano-driven work ready for placement.</p>
     </div>
   </div>
 </section>
@@ -683,12 +988,12 @@
 <!-- PROCESS -->
 <section id="process">
   <div class="section-label reveal">Process</div>
-  <h2 class="section-heading reveal">How we work together</h2>
+  <h2 class="section-heading reveal">How it works</h2>
   <div class="process-steps reveal">
     <div class="process-step">
       <div class="step-num">01</div>
-      <h4>Listen</h4>
-      <p>We talk about your project, your vision, and what the music needs to make people feel. I watch your cuts. I read your scripts.</p>
+      <h4>Immerse</h4>
+      <p>I watch your cuts. I read your scripts. I absorb the world you're building before I touch a single instrument.</p>
     </div>
     <div class="process-step">
       <div class="step-num">02</div>
@@ -711,13 +1016,11 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-label reveal">Get in touch</div>
-  <h2 class="section-heading reveal">Let's make something <br>that resonates</h2>
-  <p class="section-text reveal">Have a project in mind? Just want to talk about what music could do for your story? Reach out.</p>
-  <a href="mailto:hello@corp-vibes.com" class="contact-email reveal">hello@corp-vibes.com</a>
+  <h2 class="section-heading reveal">Let's make something<br>that resonates</h2>
+  <p class="section-text reveal" style="margin: 0 auto;">Have a project in mind? Just want to talk about what music could do for your story? Reach out.</p>
+  <a href="mailto:ad@corp-vibes.com" class="contact-email reveal">ad@corp-vibes.com</a>
   <div class="contact-socials reveal">
-    <a href="#">Instagram</a>
-    <a href="#">Spotify</a>
-    <a href="#">YouTube</a>
+    <a href="https://soundcloud.com/diet75" target="_blank" rel="noopener">SoundCloud</a>
   </div>
 </section>
 
@@ -737,11 +1040,36 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mood filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.track-card').forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+          card.style.opacity = '1';
+        } else {
+          const moods = card.dataset.moods || '';
+          if (moods.includes(filter)) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => { card.style.display = 'none'; }, 300);
+          }
+        }
+      });
+    });
+  });
 </script>
 
 </body>
